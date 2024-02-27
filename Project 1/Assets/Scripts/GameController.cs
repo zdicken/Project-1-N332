@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
     public TMP_Text timerText;
     public TMP_Text lapText;
     public bool isRaceRunning = false;
+    public static GameController instance;
 
     private int lap = 1;
     private float secondsCount;
@@ -16,7 +17,12 @@ public class GameController : MonoBehaviour {
 
     void Start() {
         //set the gameController to not be destroyed when switching scenes
-        DontDestroyOnLoad(gameObject);
+        if(instance) {
+            Destroy(this);
+        } else {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     void Update() {
