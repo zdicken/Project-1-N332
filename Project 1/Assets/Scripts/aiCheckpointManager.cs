@@ -9,6 +9,7 @@ public class aiCheckpointManager : MonoBehaviour {
     private int LayerIgnoreRaycast;
 
     public void Start() {
+        //gets the layer to ignore raycasts for the ai
         LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
         restart();
     }
@@ -17,6 +18,7 @@ public class aiCheckpointManager : MonoBehaviour {
         checkpoint.SetActive(false);
         checkpoint.layer = LayerIgnoreRaycast;
         if (!(lastCheckpoint == transform.childCount)) {
+            //sets the next checkpoint to become activate and able to be hit with a raycast
             nextCheckpoint = this.transform.GetChild(lastCheckpoint).gameObject.transform;
             nextCheckpoint.gameObject.SetActive(true);
             nextCheckpoint.gameObject.layer = 0;
@@ -25,6 +27,7 @@ public class aiCheckpointManager : MonoBehaviour {
     }
 
     public void canFinish() {
+        //makes sure the ai hit all of the checkpoints before letting them finish
         if (lastCheckpoint - 1 == transform.childCount) {
             GameObject.FindWithTag("Enemy").GetComponent<raceAgent>().crossFinishLine();
         }
@@ -34,6 +37,7 @@ public class aiCheckpointManager : MonoBehaviour {
         nextCheckpoint = this.transform.GetChild(0);
         lastCheckpoint = 0;
         for (int i = 0; i < transform.childCount; i++) {
+            //set each checkpoint to be inactive
             transform.GetChild(i).gameObject.SetActive(false);
             transform.GetChild(i).gameObject.layer = LayerIgnoreRaycast;
         }

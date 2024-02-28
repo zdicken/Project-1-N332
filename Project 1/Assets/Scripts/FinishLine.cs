@@ -11,7 +11,8 @@ public class FinishLine : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(gameController) {
+        //increments lap if player passes, otherwise resets ai episode 
+        if(other.name.Contains("Player")) {
             gameController.finishLap();
         }
 

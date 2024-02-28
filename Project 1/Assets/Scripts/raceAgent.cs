@@ -14,6 +14,7 @@ public class raceAgent : Agent {
     private int episodeTimer = 0;
 
     public override void Initialize() {
+        //finds necessary components when first ran and sets an original safe position to return to
         wheelController = GetComponent<WheelController>();
         rb = GetComponent<Rigidbody>();
         lastSafePosition = this.transform.position;
@@ -21,6 +22,7 @@ public class raceAgent : Agent {
     }
 
     public override void OnEpisodeBegin() {
+        //restarts the checkpoints and the agent's position
         this.transform.position = lastSafePosition;
         rb.velocity = new Vector3(0, 0, 0);
         this.transform.eulerAngles = new Vector3(0, 90, 0);
@@ -33,6 +35,7 @@ public class raceAgent : Agent {
 
         sensor.AddObservation(diff / 20f);
 
+        //constant negative reward to encourage speed
         AddReward(-0.0005f);
     }
 
@@ -40,6 +43,7 @@ public class raceAgent : Agent {
     public override void OnActionReceived(ActionBuffers actions) {
         var input = actions.ContinuousActions;
 
+        //take ai input to send to wheelcontrollerr
         wheelController.setAccelerationInput(input[1]);
         wheelController.setTurnInput(input[0] * 2f);
 

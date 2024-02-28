@@ -14,6 +14,7 @@ public class Checkpoint : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
+        //if this checkpoint is passed by the player, set it to be passed
         if (other.name.Contains("Player")) {
             this.setPassed(true);
         }

@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void chooseLevel(string name) {
+        //selects level and resets timer
         SceneManager.LoadScene(name);
         secondsCount = 0;
         minuteCount = 0;
@@ -57,7 +58,7 @@ public class GameController : MonoBehaviour {
         }
         lap++;
         lapText.text = "Lap " + lap.ToString();
-        if (lap >= 3)
+        if (lap > 3)
         {
             //finish the race
             isRaceRunning = false;

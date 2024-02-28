@@ -29,6 +29,7 @@ public class WheelController : MonoBehaviour {
     void FixedUpdate() {
         currentAcceleration = acceleration * -accelerationInput;
 
+        //check if the input is currently braking
         if (braking) {
             currentBrakeForce = brakingForce;
         } else {
@@ -38,6 +39,7 @@ public class WheelController : MonoBehaviour {
         frontRight.motorTorque = currentAcceleration;
         frontLeft.motorTorque = currentAcceleration;
 
+        //sets brake using wheel collider's brakeTorque
         frontRight.brakeTorque = currentBrakeForce;
         frontLeft.brakeTorque = currentBrakeForce;
         backLeft.brakeTorque = currentBrakeForce;
@@ -62,6 +64,7 @@ public class WheelController : MonoBehaviour {
         trans.rotation = rotation;
     }
 
+    //a collection of setters to allow input from both player and ai
     public void setBraking(bool brk) {
         braking = brk;
     }
@@ -70,8 +73,7 @@ public class WheelController : MonoBehaviour {
         turnInput = input;
     }
 
-    public void setAccelerationInput(float input)
-    {
+    public void setAccelerationInput(float input) {
         accelerationInput = input;
     }
 }

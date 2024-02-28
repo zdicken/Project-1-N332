@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
             this.transform.position = lastSafePosition;
         }
 
+        //checks for space braking as well as wasd or arrow key input to send to wheel controller
          if (Input.GetKey(KeyCode.Space)) {
             wheelController.setBraking(true);
         } else {
